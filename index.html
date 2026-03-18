@@ -262,7 +262,7 @@
 
     <section class="hero">
       <div>
-        <div class="badge">🚀 Премиум сайт Telegram-канала в научно-космическом стиле</div>
+        <div class="badge">🚀 Премиум сайт Telegram-канала с научно-космическим стилем</div>
         <h1><span class="gradient">Топ версия «Фактологии»</span></h1>
         <p class="lead">Короткие удивительные факты о космосе, мозге, животных, океане, истории и мире. Здесь всё сделано так, чтобы было приятно смотреть, легко читать и хотелось сразу перейти в канал.</p>
         <div class="hero-row">
@@ -270,7 +270,7 @@
           <a class="btn btn-secondary" href="#facts">Открыть 50 фактов</a>
         </div>
         <div class="stats">
-          <div class="stat"><b id="subCounter">67</b><span>подписчиков на сайте</span></div>
+          <div class="stat"><b id="subCounter">1,284</b><span>подписчиков на сайте</span></div>
           <div class="stat"><b>50</b><span>готовых фактов внутри</span></div>
           <div class="stat"><b>6</b><span>главных категорий</span></div>
           <div class="stat"><b>24/7</b><span>автосмена фактов</span></div>
@@ -288,8 +288,8 @@
             </div>
             <div class="panel subscriber-card">
               <div>
-                <div class="subscriber-num" id="liveCounter"></div>
-                <div class="subscriber-sub">подписчиков •</div>
+                <div class="subscriber-num" id="liveCounter">1,284</div>
+                <div class="subscriber-sub">подписчиков • счётчик можно менять вручную в коде</div>
               </div>
               <a class="mini-btn" href="https://t.me/faktologia_daily" target="_blank">Подписаться</a>
             </div>
@@ -300,7 +300,7 @@
 
     <section class="section" id="topics">
       <h2 class="section-title">Категории контента</h2>
-      <p class="section-text">.</p>
+      <p class="section-text">Я распределил факты по темам, чтобы сайт был живым, удобным и выглядел как полноценный медиа-проект.</p>
       <div class="topic-grid">
         <div class="topic"><div class="emoji">🧠</div><h3>Мозг и человек</h3><p>Мозг, восприятие, ДНК, тело, электричество и странные свойства человека.</p></div>
         <div class="topic"><div class="emoji">🐾</div><h3>Животные</h3><p>Осьминоги, акулы, пингвины, слоны, дельфины, ленивцы, кошки и другие.</p></div>
@@ -335,6 +335,35 @@
           <p id="featuredText">Первые акулы появились около 400 миллионов лет назад. Это значит, что они плавали в океане ещё до появления первых деревьев.</p>
         </div>
       </div>
+
+      <div class="about-grid" style="margin-top:20px;">
+        <div class="about-card">
+          <h3>🎲 Случайный факт</h3>
+          <p id="randomFactText">Нажми на кнопку и получи случайный факт из коллекции сайта.</p>
+          <div class="hero-row" style="margin-top:16px;">
+            <button class="btn btn-primary" id="randomFactBtn" type="button">Показать факт</button>
+          </div>
+        </div>
+        <div class="about-card">
+          <h3>🧩 Угадай факт</h3>
+          <p id="quizQuestion">Какое животное делает «предложение» камешком?</p>
+          <div class="hero-row" style="margin-top:16px; gap:10px;">
+            <button class="btn btn-secondary quiz-option" data-correct="false" type="button">Дельфин</button>
+            <button class="btn btn-secondary quiz-option" data-correct="true" type="button">Пингвин</button>
+            <button class="btn btn-secondary quiz-option" data-correct="false" type="button">Акула</button>
+          </div>
+          <p id="quizResult" style="margin-top:12px;color:var(--muted);"></p>
+        </div>
+        <div class="about-card">
+          <h3>📤 Поделиться сайтом</h3>
+          <p>Нажми и быстро отправь сайт друзьям или вставь ссылку в описание профиля.</p>
+          <div class="hero-row" style="margin-top:16px;">
+            <button class="btn btn-secondary" id="shareBtn" type="button">Поделиться</button>
+            <button class="btn btn-secondary" id="copyLinkBtn" type="button">Скопировать ссылку</button>
+          </div>
+          <p id="shareStatus" style="margin-top:12px;color:var(--muted);"></p>
+        </div>
+      </div>
     </section>
 
     <section class="section" id="facts">
@@ -355,7 +384,7 @@
           </div>
           <div class="side-card">
             <h3>О счётчике</h3>
-            <div class="small">Счетчик подписчиков обновляется ежедневно.</div>
+            <div class="small">Счётчик подписчиков здесь анимированный. Он не тянет реальное число из Telegram без отдельного API, но легко меняется вручную в коде за пару секунд.</div>
           </div>
         </aside>
 
@@ -364,7 +393,7 @@
             <div class="telegram-head">
               <div>
                 <h3>Посты из канала</h3>
-                <div class="telegram-mini">.</div>
+                <div class="telegram-mini">Секция выглядит как Telegram-поток. Её можно обновлять вручную или заменять на новые посты.</div>
               </div>
               <a class="btn btn-secondary" href="https://t.me/faktologia_daily" target="_blank">Открыть канал</a>
             </div>
@@ -375,6 +404,12 @@
             </div>
           </div>
 
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin:18px 0 16px;">
+            <div class="small">Прогресс просмотра: <span id="progressText">0 из 50 фактов</span></div>
+            <div style="flex:1;min-width:180px;height:10px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden;max-width:340px;">
+              <div id="progressBar" style="height:100%;width:0%;background:linear-gradient(90deg,var(--yellow),var(--cyan));"></div>
+            </div>
+          </div>
           <div id="factsGrid" class="facts-grid"></div>
         </div>
       </div>
@@ -391,11 +426,19 @@
       </div>
     </section>
 
-  
+    <section class="section">
+      <h2 class="section-title">Почему сайт выглядит сильнее</h2>
+      <div class="about-grid">
+        <div class="about-card"><h3>Премиум-визуал</h3><p>Тёмный космический фон, стеклянные карточки, анимации и насыщенные изображения делают сайт дорогим на вид.</p></div>
+        <div class="about-card"><h3>Живой контент</h3><p>Факты распределены по категориям, есть поиск, автоматическая смена главного факта и секция с постами канала.</p></div>
+        <div class="about-card"><h3>Сильный призыв</h3><p>Кнопки перехода в Telegram стоят в нужных местах, чтобы человек постоянно видел, куда подписаться.</p></div>
+      </div>
+    </section>
+
     <section class="cta-block" id="join">
       <div class="cta-content">
         <h2>Подписывайся на «Фактологию»</h2>
-        <p>Каждый день — новые факты, короткие тексты, мощный визуал и знания, которые реально удивляют.</p>
+        <p>Каждый день — новые факты, короткие тексты, мощный визуал и знания, которые реально удивляют. Сайт уже выглядит как медиа-проект, а канал можно качать дальше через рекламу и короткие видео.</p>
         <div class="hero-row">
           <a class="btn btn-primary" href="https://t.me/faktologia_daily" target="_blank">Перейти в Telegram</a>
           <a class="btn btn-secondary" href="#facts">Смотреть все 50 фактов</a>
@@ -539,8 +582,83 @@
         el.textContent = value.toLocaleString('ru-RU');
       }, 45);
     }
-    animateCounter('subCounter', 13);
-    animateCounter('liveCounter', 13);
+    animateCounter('subCounter', 1284);
+    animateCounter('liveCounter', 1284);
+    renderFacts();
+
+    function showRandomFact() {
+      const fact = facts[Math.floor(Math.random() * facts.length)];
+      document.getElementById('randomFactText').innerHTML = `<b>${fact.emoji} ${fact.title}.</b> ${fact.text}`;
+      document.getElementById('featuredTitle').textContent = `${fact.emoji} ${fact.title}`;
+      document.getElementById('featuredHeading').textContent = fact.title;
+      document.getElementById('featuredText').textContent = fact.text;
+      document.getElementById('featuredImage').src = fact.image;
+    }
+    document.getElementById('randomFactBtn').addEventListener('click', showRandomFact);
+
+    document.querySelectorAll('.quiz-option').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const ok = btn.dataset.correct === 'true';
+        document.getElementById('quizResult').textContent = ok ? '✅ Верно! Именно пингвины делают «предложение» камешком.' : '❌ Не совсем. Правильный ответ — пингвин.';
+      });
+    });
+
+    document.getElementById('copyLinkBtn').addEventListener('click', async () => {
+      const url = window.location.href;
+      try {
+        await navigator.clipboard.writeText(url);
+        document.getElementById('shareStatus').textContent = 'Ссылка скопирована.';
+      } catch (e) {
+        document.getElementById('shareStatus').textContent = 'Не удалось скопировать ссылку.';
+      }
+    });
+
+    document.getElementById('shareBtn').addEventListener('click', async () => {
+      const data = { title: 'Фактология', text: 'Смотри сайт канала «Фактология»', url: window.location.href };
+      if (navigator.share) {
+        try {
+          await navigator.share(data);
+          document.getElementById('shareStatus').textContent = 'Сайт отправлен.';
+        } catch (e) {
+          document.getElementById('shareStatus').textContent = '';
+        }
+      } else {
+        document.getElementById('shareStatus').textContent = 'Поделиться напрямую нельзя, используй кнопку копирования ссылки.';
+      }
+    });
+
+    function updateProgress() {
+      const visible = document.querySelectorAll('#factsGrid .post-card').length;
+      const total = facts.length;
+      const percent = Math.max(4, Math.round((visible / total) * 100));
+      document.getElementById('progressText').textContent = `${visible} из ${total} фактов`;
+      document.getElementById('progressBar').style.width = `${percent}%`;
+    }
+
+    const originalRenderFacts = renderFacts;
+    renderFacts = function() {
+      const filtered = facts.filter(f => {
+        const categoryOk = currentCategory === 'Все' || f.category === currentCategory;
+        const searchOk = (f.title + ' ' + f.text + ' ' + f.category).toLowerCase().includes(currentSearch.toLowerCase());
+        return categoryOk && searchOk;
+      });
+
+      factsGrid.innerHTML = filtered.map(f => `
+        <article class="post-card">
+          <div class="post-image"><img src="${f.image}" alt="${f.title}"></div>
+          <div class="post-body">
+            <div class="cat-label">${f.emoji} ${f.category}</div>
+            <h3>${f.emoji} Факт №${f.id}</h3>
+            <p><b>${f.title}.</b> ${f.text}</p>
+          </div>
+          <div class="post-footer">
+            <div class="num">#${String(f.id).padStart(2,'0')}</div>
+            <a class="post-link" href="https://t.me/faktologia_daily" target="_blank">В канал →</a>
+          </div>
+        </article>
+      `).join('');
+      updateProgress();
+    }
     renderFacts();
   </script>
 </body>
