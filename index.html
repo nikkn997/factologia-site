@@ -1,89 +1,591 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Фактология</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Фактология — удивительные факты каждый день</title>
+  <meta name="description" content="Фактология — Telegram-канал с короткими и удивительными фактами о космосе, животных, мозге, океане и истории." />
+  <style>
+    :root {
+      --bg: #06111f;
+      --bg2: #0b1830;
+      --card: rgba(255,255,255,0.07);
+      --line: rgba(255,255,255,0.12);
+      --text: #f8fbff;
+      --muted: #b8c7da;
+      --cyan: #53d8ff;
+      --blue: #5a8cff;
+      --yellow: #ffd84d;
+      --green: #54e38e;
+      --shadow: 0 20px 60px rgba(0,0,0,0.35);
+      --radius: 24px;
+    }
 
-<style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #020617;
-  color: white;
-  text-align: center;
-}
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 20% 0%, rgba(83,216,255,0.16), transparent 25%),
+        radial-gradient(circle at 80% 20%, rgba(255,216,77,0.12), transparent 18%),
+        radial-gradient(circle at 50% 100%, rgba(90,140,255,0.14), transparent 25%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      min-height: 100vh;
+    }
 
-.container {
-  padding: 40px 20px;
-  max-width: 900px;
-  margin: auto;
-}
+    .stars {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.55;
+      background-image:
+        radial-gradient(2px 2px at 20px 30px, rgba(255,255,255,0.9), transparent),
+        radial-gradient(2px 2px at 80px 90px, rgba(255,255,255,0.7), transparent),
+        radial-gradient(1.5px 1.5px at 140px 50px, rgba(255,255,255,0.9), transparent),
+        radial-gradient(1.5px 1.5px at 200px 120px, rgba(255,255,255,0.7), transparent),
+        radial-gradient(2px 2px at 260px 70px, rgba(255,255,255,0.8), transparent);
+      background-size: 320px 180px;
+    }
 
-h1 {
-  font-size: 48px;
-  background: linear-gradient(90deg, #22d3ee, #fde047);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
+    .container {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
 
-p {
-  color: #cbd5f5;
-  font-size: 18px;
-}
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+    }
 
-.button {
-  display: inline-block;
-  margin-top: 20px;
-  padding: 15px 25px;
-  background: linear-gradient(90deg, #22d3ee, #3b82f6);
-  border-radius: 12px;
-  text-decoration: none;
-  color: white;
-  font-weight: bold;
-}
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 900;
+      letter-spacing: 0.3px;
+      font-size: 24px;
+    }
 
-.card {
-  background: rgba(255,255,255,0.05);
-  padding: 20px;
-  margin-top: 20px;
-  border-radius: 15px;
-}
+    .logo {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 24px;
+      background: linear-gradient(135deg, #1542ff, #0fcff8);
+      box-shadow: 0 10px 30px rgba(15,207,248,0.35);
+    }
 
-</style>
+    .nav a {
+      color: var(--muted);
+      text-decoration: none;
+      margin-left: 18px;
+      font-weight: 600;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 28px;
+      align-items: center;
+      padding: 36px 0 56px;
+    }
+
+    .badge {
+      display: inline-flex;
+      gap: 10px;
+      align-items: center;
+      padding: 10px 16px;
+      border: 1px solid rgba(83,216,255,0.25);
+      background: rgba(83,216,255,0.08);
+      border-radius: 999px;
+      color: #c7f5ff;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: clamp(42px, 7vw, 82px);
+      line-height: 0.94;
+      margin: 0;
+      font-weight: 900;
+      letter-spacing: -1.7px;
+    }
+
+    .gradient {
+      background: linear-gradient(90deg, #ffffff, #7be7ff 45%, #ffe37a 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .lead {
+      color: var(--muted);
+      font-size: 19px;
+      line-height: 1.75;
+      margin: 22px 0 0;
+      max-width: 680px;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 15px 22px;
+      border-radius: 16px;
+      text-decoration: none;
+      font-weight: 800;
+      transition: 0.18s ease;
+      box-shadow: var(--shadow);
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary {
+      color: #06111f;
+      background: linear-gradient(90deg, var(--yellow), var(--cyan));
+    }
+    .btn-secondary {
+      color: var(--text);
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.05);
+    }
+
+    .hero-card {
+      position: relative;
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 32px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      min-height: 560px;
+    }
+
+    .hero-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: saturate(1.05) contrast(1.03);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.08), rgba(2,8,23,0.78));
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 22px;
+    }
+
+    .mini-tag {
+      align-self: flex-start;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(6,17,31,0.65);
+      border: 1px solid rgba(255,255,255,0.14);
+      font-size: 13px;
+      font-weight: 800;
+      color: #dbeafe;
+    }
+
+    .fact-box {
+      background: rgba(6,17,31,0.7);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 22px;
+      padding: 18px;
+      backdrop-filter: blur(8px);
+    }
+
+    .fact-box h3 {
+      margin: 0 0 8px;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+      color: #bfeeff;
+      text-transform: uppercase;
+    }
+
+    .fact-box p {
+      margin: 0;
+      font-size: 26px;
+      line-height: 1.3;
+      font-weight: 800;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 22px;
+      max-width: 720px;
+    }
+
+    .stat {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 18px;
+      text-align: center;
+    }
+
+    .stat b { display: block; font-size: 24px; margin-bottom: 6px; }
+    .stat span { color: var(--muted); font-size: 14px; }
+
+    .section {
+      padding: 34px 0;
+    }
+
+    .section-title {
+      font-size: clamp(28px, 4vw, 46px);
+      font-weight: 900;
+      margin: 0 0 10px;
+    }
+
+    .section-text {
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 18px;
+      max-width: 780px;
+      margin: 0 0 22px;
+    }
+
+    .topics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .topic {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .topic .emoji { font-size: 34px; }
+    .topic h3 { margin: 14px 0 10px; font-size: 22px; }
+    .topic p { margin: 0; color: var(--muted); line-height: 1.7; }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 20px;
+      margin-top: 18px;
+    }
+
+    .gallery-card,
+    .post-card,
+    .why-card,
+    .cta-block {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .gallery-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      min-height: 370px;
+    }
+
+    .gallery-side {
+      display: grid;
+      gap: 20px;
+    }
+
+    .image-caption {
+      padding: 18px 20px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .posts {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .post-card {
+      padding: 24px;
+    }
+
+    .post-card h3 {
+      margin: 0 0 12px;
+      font-size: 28px;
+      line-height: 1.25;
+    }
+
+    .post-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 17px;
+    }
+
+    .post-link {
+      display: inline-block;
+      margin-top: 16px;
+      color: #7be7ff;
+      text-decoration: none;
+      font-weight: 800;
+    }
+
+    .why {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .why-card {
+      padding: 22px;
+    }
+
+    .why-card h3 {
+      margin: 0 0 10px;
+      font-size: 22px;
+    }
+
+    .why-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .cta-block {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: center;
+      margin: 30px 0 50px;
+      background: linear-gradient(135deg, rgba(83,216,255,0.14), rgba(255,216,77,0.1));
+    }
+
+    .cta-content {
+      padding: 34px;
+    }
+
+    .cta-content h2 {
+      margin: 0 0 10px;
+      font-size: clamp(30px, 4.5vw, 54px);
+      line-height: 1.05;
+    }
+
+    .cta-content p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 18px;
+    }
+
+    .cta-image img {
+      width: 100%;
+      height: 100%;
+      min-height: 320px;
+      object-fit: cover;
+      display: block;
+    }
+
+    footer {
+      padding: 10px 0 36px;
+      color: #a7b6ca;
+      text-align: center;
+    }
+
+    @media (max-width: 980px) {
+      .hero,
+      .gallery,
+      .cta-block,
+      .topics,
+      .posts,
+      .why {
+        grid-template-columns: 1fr;
+      }
+      .stats { grid-template-columns: 1fr; }
+      .nav { flex-direction: column; gap: 10px; }
+      .nav-links { display: none; }
+      .hero-card { min-height: 420px; }
+    }
+  </style>
 </head>
-
 <body>
+  <div class="stars"></div>
 
-<div class="container">
+  <div class="container">
+    <nav class="nav">
+      <div class="brand">
+        <div class="logo">🧠</div>
+        <div>Фактология</div>
+      </div>
+      <div class="nav-links">
+        <a href="#posts">Посты</a>
+        <a href="#topics">Темы</a>
+        <a href="#join">Подписаться</a>
+      </div>
+    </nav>
 
-<h1>Фактология</h1>
+    <section class="hero">
+      <div>
+        <div class="badge">🚀 Научный Telegram-канал в космическом стиле</div>
+        <h1><span class="gradient">Факты, которые реально удивляют</span></h1>
+        <p class="lead">
+          «Фактология» — это короткие и цепляющие факты о космосе, животных, мозге, океане, истории и мире.
+          Один пост — одно знание, которое хочется переслать друзьям.
+        </p>
 
-<p>
-Факты, которые реально удивляют.<br>
-1 минута — новое знание.
-</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="https://t.me/faktologia_daily" target="_blank">Перейти в канал</a>
+          <a class="btn btn-secondary" href="#posts">Смотреть посты</a>
+        </div>
 
-<a class="button" href="https://t.me/faktologia_daily" target="_blank">
-Перейти в Telegram
-</a>
+        <div class="stats">
+          <div class="stat"><b>Каждый день</b><span>новые короткие факты</span></div>
+          <div class="stat"><b>Космос + наука</b><span>самые сильные темы канала</span></div>
+          <div class="stat"><b>Без воды</b><span>только самое интересное</span></div>
+        </div>
+      </div>
 
-<div class="card">
-<h3>🐙 У осьминога 3 сердца</h3>
-<p>Одно из них останавливается, когда он плывёт.</p>
-</div>
+      <div class="hero-card">
+        <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=1200&q=80" alt="Космос" />
+        <div class="hero-overlay">
+          <div class="mini-tag">Факт дня</div>
+          <div class="fact-box">
+            <h3>Удивительный факт</h3>
+            <p>На Земле может быть больше деревьев, чем звёзд в нашей галактике.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<div class="card">
-<h3>🦈 Акулы старше деревьев</h3>
-<p>Они появились на Земле раньше первых деревьев.</p>
-</div>
+    <section class="section" id="topics">
+      <h2 class="section-title">Что будет в канале</h2>
+      <p class="section-text">Здесь собраны темы, которые лучше всего заходят аудитории: космос, природа, история, мозг и невероятные факты о мире.</p>
+      <div class="topics">
+        <div class="topic">
+          <div class="emoji">🌌</div>
+          <h3>Космос</h3>
+          <p>Планеты, звёзды, галактики и невероятные тайны Вселенной.</p>
+        </div>
+        <div class="topic">
+          <div class="emoji">🐙</div>
+          <h3>Животные</h3>
+          <p>Самые неожиданные факты о существах Земли и океана.</p>
+        </div>
+        <div class="topic">
+          <div class="emoji">🧠</div>
+          <h3>Мозг и человек</h3>
+          <p>Шокирующие особенности мозга, тела и человеческой природы.</p>
+        </div>
+        <div class="topic">
+          <div class="emoji">🏛️</div>
+          <h3>История</h3>
+          <p>Необычные факты о древних цивилизациях, прошлом и открытиях.</p>
+        </div>
+      </div>
+    </section>
 
-<div class="card">
-<h3>🐧 Пингвины делают предложение камешком</h3>
-<p>Самец дарит камень, и если самка принимает — они пара.</p>
-</div>
+    <section class="section">
+      <h2 class="section-title">Стиль канала</h2>
+      <p class="section-text">Космический тёмный дизайн, яркие акценты и визуал, который выглядит как у большого медиа-канала.</p>
+      <div class="gallery">
+        <div class="gallery-card">
+          <img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=1200&q=80" alt="Земля из космоса" />
+          <div class="image-caption">Контент в научно-космическом стиле помогает сразу выделиться и делает канал визуально сильнее.</div>
+        </div>
+        <div class="gallery-side">
+          <div class="gallery-card">
+            <img src="https://images.unsplash.com/photo-1535930749574-1399327ce78f?auto=format&fit=crop&w=1200&q=80" alt="Океан и акула" />
+            <div class="image-caption">Факты про океан, животных и древний мир отлично работают на удержание.</div>
+          </div>
+          <div class="gallery-card">
+            <img src="https://images.unsplash.com/photo-1502134249126-9f3755a50d78?auto=format&fit=crop&w=1200&q=80" alt="Галактика" />
+            <div class="image-caption">Космос и масштабные темы чаще вызывают «вау»-эффект и желание переслать пост.</div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-</div>
+    <section class="section" id="posts">
+      <h2 class="section-title">Реальные посты</h2>
+      <p class="section-text">Вот примеры того, как может выглядеть контент внутри канала.</p>
+      <div class="posts">
+        <article class="post-card">
+          <h3>🐙 У осьминога 3 сердца</h3>
+          <p>Два сердца качают кровь через жабры, а третье — по всему телу. Самое странное: когда осьминог плывёт, его главное сердце останавливается.</p>
+          <a class="post-link" href="https://t.me/faktologia_daily" target="_blank">Читать в канале →</a>
+        </article>
+        <article class="post-card">
+          <h3>🦈 Акулы старше деревьев</h3>
+          <p>Первые акулы появились около 400 миллионов лет назад, а первые деревья — примерно 350 миллионов лет назад. Получается, акулы древнее лесов.</p>
+          <a class="post-link" href="https://t.me/faktologia_daily" target="_blank">Читать в канале →</a>
+        </article>
+        <article class="post-card">
+          <h3>🐧 Пингвины делают предложение камешком</h3>
+          <p>Самец пингвина ищет красивый камень и приносит его самке. Если она принимает подарок, они становятся парой и строят гнездо вместе.</p>
+          <a class="post-link" href="https://t.me/faktologia_daily" target="_blank">Читать в канале →</a>
+        </article>
+        <article class="post-card">
+          <h3>🌳 На Земле может быть больше деревьев, чем звёзд</h3>
+          <p>Учёные оценивают количество деревьев на Земле примерно в 3 триллиона, а звёзд в Млечном Пути — в сотни миллиардов.</p>
+          <a class="post-link" href="https://t.me/faktologia_daily" target="_blank">Читать в канале →</a>
+        </article>
+      </div>
+    </section>
 
+    <section class="section">
+      <h2 class="section-title">Почему это цепляет</h2>
+      <div class="why">
+        <div class="why-card">
+          <h3>Быстро читается</h3>
+          <p>Каждый факт короткий, понятный и сразу даёт ощущение «ничего себе».</p>
+        </div>
+        <div class="why-card">
+          <h3>Выглядит дорого</h3>
+          <p>Тёмный научный стиль, космос и сильный визуал делают проект профессиональным.</p>
+        </div>
+        <div class="why-card">
+          <h3>Хочется переслать</h3>
+          <p>Лучшие факты вызывают эмоцию и работают на репосты и рост канала.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-block" id="join">
+      <div class="cta-content">
+        <h2>Подписывайся на «Фактологию»</h2>
+        <p>Если любишь факты, которые удивляют с первых секунд — заходи в канал. Там каждый день новый пост, новый «вау»-момент и новое знание.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="https://t.me/faktologia_daily" target="_blank">Открыть канал</a>
+        </div>
+      </div>
+      <div class="cta-image">
+        <img src="https://images.unsplash.com/photo-1516339901601-2e1b62dc0c45?auto=format&fit=crop&w=1200&q=80" alt="Космос и звёзды" />
+      </div>
+    </section>
+
+    <footer>
+      © Фактология • Telegram: @faktologia_daily
+    </footer>
+  </div>
 </body>
 </html>
